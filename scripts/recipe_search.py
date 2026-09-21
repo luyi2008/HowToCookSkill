@@ -186,7 +186,7 @@ class RecipeSearcher:
                 'difficulty': difficulty,
                 'category': category,
                 'ingredients': ingredients[:5],  # Store main ingredients
-                'path': str(file_path)
+                'path': str(file_path.relative_to(self.cookbook_path))
             }
         except Exception:
             return None
@@ -393,6 +393,7 @@ class RecipeSearcher:
                     recipe_path = search_results[0]['path']
                 else:
                     return None
+            recipe_path = str(self.cookbook_path / recipe_path)
 
         if not recipe_path:
             return None
